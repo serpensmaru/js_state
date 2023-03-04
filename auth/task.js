@@ -16,18 +16,19 @@ document.forms.signin__form.addEventListener("submit", (e) => {
     password = passInput.value
 
     let data = new FormData(document.forms.signin__form)
-    data.append("логин", login)
-    data.append("пароль", password)
+
 
     response = new XMLHttpRequest()
+    response.responseType = 'json'
 
-    response.addEventListener("readystatechange", () => {
+    response.addEventListener("load", () => {
         if (response.readyState === response.DONE) {
-            let res = JSON.parse(response.response)
+            let res = response.response
             const idSpan = document.getElementById("user_id")
             if (res.success) {
                 idSpan.textContent = res.user_id
                 idSpan.closest(".welcome").classList.add("welcome_active")
+                document.getElementById("signin__form").reset()
             } else {
                 idSpan.closest(".welcome").classList.remove("welcome_active")
                 alert("Неверный логин/пароль")

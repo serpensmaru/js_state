@@ -8,6 +8,6 @@ editor.addEventListener("input", () => {
 
 const reset = document.getElementById("reset")
 reset.addEventListener("click", () => {
-    reset.closest(".content").querySelector("textarea").value = ""
-    localStorage.setItem("editorSave", "")
+    editor.value = ""
+    localStorage.removeItem("editorSave")
 })
